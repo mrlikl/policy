@@ -15,10 +15,7 @@ export class PolicyStack extends cdk.Stack {
     })
 
     //creates IAM-policy only
-    const role_from_name = iam.Role.fromRoleName(this, 'CDKRole', 'cdk-role', {
-      mutable: false,
-      addGrantsToResources: true
-    })
+    const role_from_name = iam.Role.fromRoleName(this, 'CDKRole', 'cdk-role')
     s3KmsKey.grantEncryptDecrypt(role_from_name)
     bucket.grantReadWrite(role_from_name)
 
