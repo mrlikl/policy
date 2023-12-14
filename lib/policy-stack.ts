@@ -14,18 +14,18 @@ export class PolicyStack extends cdk.Stack {
       encryptionKey: s3KmsKey
     })
 
-    //creates IAM-policy only
-    const role_from_name = iam.Role.fromRoleName(this, 'CDKRole', 'cdk-role')
-    s3KmsKey.grantEncryptDecrypt(role_from_name)
-    bucket.grantReadWrite(role_from_name)
+    // //creates IAM-policy only
+    // const role_from_name = iam.Role.fromRoleName(this, 'CDKRole', 'cdk-role')
+    // s3KmsKey.grantEncryptDecrypt(role_from_name)
+    // bucket.grantReadWrite(role_from_name)
 
     //creates/appends KMS.KeyPolicy + IAM-Policy
-    // const role_from_arn = iam.Role.fromRoleArn(
-    //   this,
-    //   'CDKRole',
-    //   'arn:aws:iam::072179961767:role/cdk-role'
-    // )
-    // s3KmsKey.grantEncryptDecrypt(role_from_arn)
-    // bucket.grantReadWrite(role_from_arn)
+    const role_from_arn = iam.Role.fromRoleArn(
+      this,
+      'CDKRole',
+      'arn:aws:iam::072179961767:role/cdk-role'
+    )
+    s3KmsKey.grantEncryptDecrypt(role_from_arn)
+    bucket.grantReadWrite(role_from_arn)
   }
 }
